@@ -29,7 +29,7 @@ export const logout = async () => {
       method: 'GET',
       url: 'http://localhost:8501/api/v1/users/logout'
     });
-    console.log(res.data.status);
+    // console.log(res.data.status);
     if (res.data.status === 'success') {
       showAlert('success', 'Successfully logged out!');
       location.reload(true); //to prompt a reload from the server side

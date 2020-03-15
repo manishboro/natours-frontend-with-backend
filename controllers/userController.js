@@ -1,6 +1,6 @@
 const multer = require('multer');
-const User = require('./../models/userModel');
 const sharp = require('sharp');
+const User = require('./../models/userModel');
 const catchAsync = require('./../utils/catchAsync');
 const AppError = require('./../utils/appError');
 const Factory = require('./handlerFactory');
@@ -40,19 +40,20 @@ const filterObj = (obj, ...allowedFields) => {
 
 exports.uploadUserPhoto = upload.single('photo');
 
-exports.resizeUserPhoto = (req, res, next) => {
+exports.resizeUserPhoto = catchAsync(async (req, res, next) => {
+  // console.log(req.file);
   if (!req.file) return next();
 
   req.file.filename = `user-${req.user.id}-${Date.now()}.jpeg`;
 
-  sharp(req.file.buffer)
+  await sharp(req.file.buffer)
     .resize(500, 500)
     .toFormat('jpeg')
     .jpeg({ quality: 90 })
     .toFile(`public/img/users/${req.file.filename}`);
 
   next();
-};
+});
 
 exports.updateMe = catchAsync(async (req, res, next) => {
   //1) Create error if user posts user data

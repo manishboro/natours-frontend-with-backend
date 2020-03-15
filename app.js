@@ -11,6 +11,7 @@ const cookieParser = require('cookie-parser');
 const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
+const bookingRouter = require('./routes/bookingRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const AppError = require('./utils/appError');
@@ -75,6 +76,7 @@ app.use('/', viewRouter);
 app.use('/api/v1/tours', tourRouter); //middleware
 app.use('/api/v1/users', userRouter); //middleware
 app.use('/api/v1/reviews', reviewRouter); //middleware
+app.use('/api/v1/bookings', bookingRouter); //middleware
 
 //all the unmatched url's will generate the below error
 app.all('*', (req, res, next) => {
