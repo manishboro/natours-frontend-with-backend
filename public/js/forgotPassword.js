@@ -10,8 +10,8 @@ export const forgotPassword = async email => {
         email
       }
     });
-    console.log('email', email);
-    console.log(res);
+    // console.log('email', email);
+    // console.log(res);
     if (res.data.status === 'success') {
       showAlert('success', 'Please check your email for the reset link!');
       window.setTimeout(() => {
@@ -20,5 +20,32 @@ export const forgotPassword = async email => {
     }
   } catch (err) {
     showAlert('error', err.response.data.message);
+  }
+};
+
+export const resetPassword = async (password, passwordConfirm, params) => {
+  try {
+    console.log(params);
+    const res = await axios({
+      method: 'PATCH',
+      url: `http://localhost:8501/api/v1/users${params}`,
+      data: {
+        password,
+        passwordConfirm
+      }
+    });
+    // console.log('email', email);
+    console.log('resetpassword', res);
+    if (res.data.status === 'success') {
+      showAlert('success', 'Password changed successfully!');
+      window.setTimeout(() => {
+        location.assign('/');
+      }, 1500);
+    }
+  } catch (err) {
+    showAlert('error', err.response.data.message);
+    window.setTimeout(() => {
+      location.assign('/');
+    }, 1500);
   }
 };

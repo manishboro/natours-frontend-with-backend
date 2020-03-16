@@ -7,7 +7,7 @@ router.post('/signup', authController.signup);
 router.post('/login', authController.login);
 router.get('/logout', authController.logout);
 router.post('/forgotPassword', authController.forgotPassword);
-router.get('/resetPassword/:token', authController.resetPassword);
+router.patch('/reset-password/:token', authController.resetPassword);
 
 //PROTECT ALL ROUTES AFTER THIS MIDDLEWARE
 router.use(authController.protect);
