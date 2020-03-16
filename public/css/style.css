@@ -1277,3 +1277,15 @@ body {
   -webkit-transform: translateY(-2px);
   transform: translateY(-2px);
 }
+
+.forgotPassword-btn:link,
+.forgotPassword-btn:visited {
+  margin-left: 15rem;
+  font-size: 1.8rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.forgotPassword-btn:hover {
+  color: #55c57a;
+}
