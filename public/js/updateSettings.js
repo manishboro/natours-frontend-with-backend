@@ -12,14 +12,12 @@ export const updateSettings = async (data, type) => {
       url,
       data
     });
-
+    console.log(res);
     if (res.data.status === 'success') {
       showAlert('success', `${type.toUpperCase()} updated successfully!`);
+      location.reload(true);
     }
   } catch (err) {
-    // if (err.response.data.message === 'Your current password is wrong!') {
-    //   return showAlert('error', err.response.data.message);
-    // }
-    showAlert('error', err.response.data.message.split(':')[2]);
+    showAlert('error', err.response.data.message);
   }
 };

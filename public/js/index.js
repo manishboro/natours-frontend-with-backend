@@ -80,21 +80,23 @@ if (bookBtn)
   });
 
 if (forgotPasswordForm) {
-  forgotPasswordForm.addEventListener('submit', e => {
+  forgotPasswordForm.addEventListener('submit', async e => {
     e.preventDefault();
     document.querySelector('.btn--forgotPassword').textContent = 'sending...';
     const email = document.getElementById('email-forgotPassword').value;
-    forgotPassword(email);
+    await forgotPassword(email);
+    document.querySelector('.btn--forgotPassword').textContent = 'send';
   });
 }
 
 if (resetPasswordForm) {
-  resetPasswordForm.addEventListener('submit', e => {
+  resetPasswordForm.addEventListener('submit', async e => {
     e.preventDefault();
     const params = window.location.pathname;
     document.querySelector('.btn--resetPassword').textContent = 'Changing password...';
     const password = document.getElementById('password-resetPassword').value;
     const passwordConfirm = document.getElementById('passwordConfirm-resetPassword').value;
-    resetPassword(password, passwordConfirm, params);
+    await resetPassword(password, passwordConfirm, params);
+    document.querySelector('.btn--resetPassword').textContent = 'Changing password';
   });
 }
