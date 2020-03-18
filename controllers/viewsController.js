@@ -64,7 +64,12 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
 
   //2) Find tours with the returned ids
   const tourIds = bookings.map(el => el.tour);
-  const tours = await Tour.find({ _id: { $in: tourIds } }); //it means all finding all tours whose id is in the tourIds array
+  const tours = await Tour.find({ _id: { $in: tourIds } }); //it means finding all tours whose id is in the tourIds array
+  if (tours.length === 0)
+    return res.status(200).render('error', {
+      title: 'My Tours',
+      msg: 'You have not booked any tour!'
+    });
   res.status(200).render('overview', {
     title: 'My Tours',
     tours
@@ -74,5 +79,12 @@ exports.getMyTours = catchAsync(async (req, res, next) => {
 exports.getAccount = (req, res) => {
   res.status(200).render('account', {
     title: 'Your account'
+  });
+};
+
+exports.displayError = (req, res) => {
+  res.status(200).render('error', {
+    title: 'Feature not implemented',
+    msg: 'Sorry, this feature is not yet implemented!'
   });
 };
