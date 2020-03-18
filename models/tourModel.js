@@ -173,11 +173,11 @@ tourSchema.virtual('reviews', {
   localField: '_id'
 });
 
-tourSchema.post(/^find/, function(docs, next) {
-  console.log(`query took ${Date.now() - this.start} milliseconds`);
-  // console.log(docs);
-  next();
-});
+// tourSchema.post(/^find/, function(docs, next) {
+//   console.log(`query took ${Date.now() - this.start} milliseconds`);
+//   // console.log(docs);
+//   next();
+// });
 
 //AGGREGATION MIDDLEWARE
 // tourSchema.pre('aggregate', function(next) {

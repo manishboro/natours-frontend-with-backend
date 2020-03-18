@@ -144,7 +144,7 @@ exports.getToursWithin = catchAsync(async (req, res, next) => {
   const { distance, latlng, unit } = req.params;
 
   const [lat, lng] = latlng.split(',');
-  console.log(distance, latlng, unit);
+  // console.log(distance, latlng, unit);
 
   const radius = unit === 'mi' ? distance / 3963.2 : distance / 6378.1;
   //3963.2 = radius of earth in miles, 6378.1 = radius of earth in kilometres

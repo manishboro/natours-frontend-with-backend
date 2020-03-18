@@ -6,7 +6,7 @@ const User = require('./../../models/userModel');
 const Review = require('./../../models/reviewModel');
 dotenv.config({ path: './../../config.env' });
 
-console.log(process.env.DATABASE_LOCAL);
+// console.log(process.env.DATABASE_LOCAL);
 
 mongoose
   .connect('mongodb://localhost:27017/natours', {

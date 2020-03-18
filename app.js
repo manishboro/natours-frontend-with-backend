@@ -6,6 +6,7 @@ const helmet = require('helmet');
 const mongoSanitize = require('express-mongo-sanitize');
 const xss = require('xss-clean');
 const hpp = require('hpp');
+const compression = require('compression');
 const cookieParser = require('cookie-parser');
 
 const globalErrorHandler = require('./controllers/errorController');
@@ -16,7 +17,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const AppError = require('./utils/appError');
 
-console.log(process.env.NODE_ENV);
+// console.log(process.env.NODE_ENV);
 
 const app = express();
 
@@ -70,6 +71,8 @@ app.use((req, res, next) => {
   // console.log(req.cookies);
   next();
 });
+
+app.use(compression());
 
 //ROUTES
 app.use('/', viewRouter);
