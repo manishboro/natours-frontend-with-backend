@@ -49,11 +49,13 @@ if (logOutBtn) {
 if (userDataForm) {
   userDataForm.addEventListener('submit', async e => {
     e.preventDefault();
+    document.querySelector('.btn--saveSettings').textContent = 'Saving settings...';
     const form = new FormData();
     form.append('email', document.getElementById('email').value);
     form.append('name', document.getElementById('name').value);
     form.append('photo', document.getElementById('photo').files[0]);
     await updateSettings(form, 'data');
+    document.querySelector('.btn--saveSettings').textContent = 'Save settings';
   });
 }
 
