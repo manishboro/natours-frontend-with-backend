@@ -13,7 +13,7 @@ const app = require('./app');
 
 //console.log(process.env);
 
-const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
+const DB = process.env.DATABASE_URI.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
 
 mongoose
   .connect(DB, {
