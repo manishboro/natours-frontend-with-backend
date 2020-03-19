@@ -20,6 +20,7 @@ const AppError = require('./utils/appError');
 // console.log(process.env.NODE_ENV);
 
 const app = express();
+app.enable('trust proxy');
 
 //specifying the type of template engine to be used. pug is a template engine.
 app.set('view engine', 'pug');

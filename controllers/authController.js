@@ -21,7 +21,8 @@ const createSendToken = (user, statusCode, res) => {
 
   //sending JWT token via cookie
   // console.log('environment = ', process.env.NODE_ENV);
-  if (process.env.NODE_ENV === 'production') cookieOptions.secure = true; //Setting the secure flag prevents the cookie from ever being sent over an unencrypted connection
+  //if (process.env.NODE_ENV === 'production') cookieOptions.secure = true; //Setting the secure flag prevents the cookie from ever being sent over an unencrypted connection
+  if (req.secure || req.headers['x-forward-proto'] === 'https') cookieOptions.secure = true;
   res.cookie('jwt', token, cookieOptions);
 
   //To remove password from output
