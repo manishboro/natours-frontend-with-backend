@@ -26,13 +26,15 @@ if (loginForm)
   });
 
 if (signupForm)
-  signupForm.addEventListener('submit', e => {
+  signupForm.addEventListener('submit', async e => {
     e.preventDefault();
+    document.querySelector('.signup-btn').textContent = 'Signing up...';
     const name = document.getElementById('name-signup').value;
     const email = document.getElementById('email-signup').value;
     const password = document.getElementById('password-signup').value;
     const passwordConfirm = document.getElementById('passwordConfirm-signup').value;
-    signup(name, email, password, passwordConfirm);
+    await signup(name, email, password, passwordConfirm);
+    document.querySelector('.signup-btn').textContent = 'Sign up';
   });
 
 if (mapBox) {

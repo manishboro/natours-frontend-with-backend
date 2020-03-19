@@ -13,8 +13,10 @@ const app = require('./app');
 
 //console.log(process.env);
 
+const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
+
 mongoose
-  .connect(process.env.DATABASE_LOCAL, {
+  .connect(DB, {
     useNewUrlParser: true,
     useCreateIndex: true,
     useFindAndModify: false,
@@ -22,7 +24,7 @@ mongoose
   })
   .then(() => console.log('DB connection successful'));
 
-const port = 8501 || process.env.PORT;
+const port = process.env.PORT || 8501;
 const server = app.listen(port, () => console.log(`app running on ${port}..`));
 
 //to handle unhandled rejection / errors occurred in asynchronous code
