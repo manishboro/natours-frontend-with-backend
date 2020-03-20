@@ -18,6 +18,7 @@ router.patch(
   userController.resizeUserPhoto,
   userController.updateMe
 );
+router.post('/verifyBeforeDelete', userController.verifyBeforeDelete);
 router.delete('/deleteMe', userController.deleteMe);
 router.get('/me', userController.getMe, userController.getUser);
 

@@ -21,6 +21,7 @@ router.get('/manage-tours', authController.protect, viewsController.displayError
 router.get('/manage-users', authController.protect, viewsController.displayError);
 router.get('/manage-reviews', authController.protect, viewsController.displayError);
 router.get('/manage-bookings', authController.protect, viewsController.displayError);
+router.get('/delete-account', authController.protect, viewsController.getVerifyBeforeDeleteForm);
 router.get('/my-reviews', authController.protect, viewsController.displayError);
 router.get('/billing', authController.protect, viewsController.displayError);
 

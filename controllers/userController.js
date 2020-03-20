@@ -78,6 +78,30 @@ exports.updateMe = catchAsync(async (req, res, next) => {
   });
 });
 
+exports.verifyBeforeDelete = catchAsync(async (req, res, next) => {
+  const { email, password } = req.body;
+  // console.log(req.body);
+
+  //1) check if email and password exists
+  if (!email || !password) {
+    return next(new AppError('Please provide email and password', 400));
+  }
+
+  //2) check if user exists and password is correct
+  const user = await User.findOne({ email: email }).select('+password');
+  if (!user) {
+    return next(new AppError('User does not exist!', 401));
+  }
+
+  if (!(await user.correctPassword(password, user.password))) {
+    return next(new AppError('Incorrect email or password', 401));
+  }
+
+  res.status(200).json({
+    status: 'success'
+  });
+});
+
 exports.deleteMe = catchAsync(async (req, res, next) => {
   await User.findByIdAndUpdate(req.user.id, { active: false });
 

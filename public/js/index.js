@@ -5,10 +5,12 @@ import { displayMap } from './mapbox';
 import { updateSettings } from './updateSettings';
 import { forgotPassword, resetPassword } from './forgotPassword';
 import { bookTour } from './stripe';
+import { deleteAccount } from './deleteAccount';
 
 //DOM Elements
 const mapBox = document.getElementById('map');
 const loginForm = document.querySelector('.form--login');
+const deleteAccountForm = document.querySelector('.form--deleteAccount');
 const signupForm = document.querySelector('.form--signup');
 const logOutBtn = document.querySelector('.nav__el--logout');
 const userDataForm = document.querySelector('.form-user-data');
@@ -16,6 +18,16 @@ const userPasswordForm = document.querySelector('.form-user-password');
 const bookBtn = document.getElementById('book-tour-0');
 const forgotPasswordForm = document.querySelector('.form--forgotPassword');
 const resetPasswordForm = document.querySelector('.form--resetPassword');
+
+if (deleteAccountForm)
+  deleteAccountForm.addEventListener('submit', async e => {
+    e.preventDefault();
+    document.querySelector('.btnVerify').textContent = 'deleting...';
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    await deleteAccount(email, password);
+    document.querySelector('.btnVerify').textContent = 'delete';
+  });
 
 if (loginForm)
   loginForm.addEventListener('submit', e => {

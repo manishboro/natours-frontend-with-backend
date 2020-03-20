@@ -88,3 +88,9 @@ exports.displayError = (req, res) => {
     msg: 'Sorry, this feature is not yet implemented!'
   });
 };
+
+exports.getVerifyBeforeDeleteForm = (req, res) => {
+  res.status(200).render('delete-account', {
+    title: 'Delete your account'
+  });
+};
