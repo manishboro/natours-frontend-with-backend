@@ -14,6 +14,7 @@ const globalErrorHandler = require('./controllers/errorController');
 const tourRouter = require('./routes/tourRoutes');
 const userRouter = require('./routes/userRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
+const bookingController = require('./controllers/bookingController');
 const reviewRouter = require('./routes/reviewRoutes');
 const viewRouter = require('./routes/viewRoutes');
 const AppError = require('./utils/appError');
@@ -59,6 +60,8 @@ const limiter = rateLimit({
 
 //implementing rate limiting in /api route
 app.use('/api', limiter);
+//we require stripe body in raw form and not in json. that is why '/webhook-checkout' is called before 'express.json'
+app.post('/webhook-checkout', express.raw({ type: 'application/json' }), bookingController.webhookCheckout);
 
 //BODY PARSER, TO READ DATA FROM req.body
 app.use(express.json({ limit: '10kB' }));
