@@ -64,7 +64,8 @@ app.use('/api', limiter);
 //we require stripe body in raw form and not in json. that is why '/webhook-checkout' is called before 'express.json'
 app.post(
   '/webhook-checkout',
-  bodyParser.raw({ type: 'application/json' }),
+  // bodyParser.raw({ type: 'application/json' }),
+  express.raw({ type: 'application/json' }),
   bookingController.webhookCheckout
 );
 
