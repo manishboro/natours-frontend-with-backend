@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const compression = require('compression');
 const cookieParser = require('cookie-parser');
+const bodyParser = require('body-parser');
 const cors = require('cors');
 
 const globalErrorHandler = require('./controllers/errorController');
@@ -61,7 +62,11 @@ const limiter = rateLimit({
 //implementing rate limiting in /api route
 app.use('/api', limiter);
 //we require stripe body in raw form and not in json. that is why '/webhook-checkout' is called before 'express.json'
-app.post('/webhook-checkout', express.raw({ type: 'application/json' }), bookingController.webhookCheckout);
+app.post(
+  '/webhook-checkout',
+  bodyParser.raw({ type: 'application/json' }),
+  bookingController.webhookCheckout
+);
 
 //BODY PARSER, TO READ DATA FROM req.body
 app.use(express.json({ limit: '10kB' }));
